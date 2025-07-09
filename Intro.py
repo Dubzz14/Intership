@@ -1,37 +1,3 @@
-# """This module defines classes for representing various components of a bank account."""
-
-# class OpeningAmount:
-#     """Represents the opening amount of a bank account."""
-#     def __init__(self, amount):
-#         self.amount = amount
-
-#     def __repr__(self):
-#         return f"OpeningAmount({self.amount})"
-# amount = "$400.00"
-# print("Opening Amount:", amount) 
-
-
-# class BankName:
-#     """Represents the name of a bank."""
-#     def __init__(self, name):
-#         self.name = name
-
-#     def __repr__(self):
-#         return f"BankName({self.name})"
-# Bank = BankName("Bank of America")
-# print("Bank Name:", Bank.name)
-
-# class BankNumber:
-#     """Represents the bank number of a bank account."""
-#     def __init__(self, number):
-#         self.number = number
-
-#     def __repr__(self):
-#         return f"BankNumber({self.number})"
-# BankNum = BankNumber("123456789")
-# print("Bank Number:", BankNum.number)
-
-
 class BankAccount:
     def __init__(self, Account_number, name, amount):
         self.Account_number = Account_number
@@ -91,5 +57,7 @@ Ngozi_ci2 = Retirement_fund(55,65000, 'Ngozi', 22334567, None  )
 print (Ngozi_ci1.check_retirement_age())
 print (Ngozi_ci2.check_retirement_age())
 
+transaction_history = []
 
-    
+def store_transaction(name, amount, transaction_type, account_number):
+    transaction_history.append({"name":name, "amount":amount, "transaction type": transaction_type, "account number": account_number})
