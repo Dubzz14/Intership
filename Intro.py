@@ -16,7 +16,6 @@ class BankAccount:
         
     
     def deposit(self, d_amount):
-        print("Your account does not support this transaction")
         self.amount = d_amount + self.amount
         self.transaction_history.append(f"Deposit: {d_amount}")
         self.store_transaction(self.name, self.amount, "Deposit", self.Account_number)
