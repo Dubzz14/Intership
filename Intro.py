@@ -9,23 +9,25 @@ class BankAccount:
         if w_amount > self.amount:
             print("Insuffisient funds")
         else:
+            balance_before = self.amount
             self.amount = self.amount - w_amount
             self.transaction_history.append(f"Withdrawal: {w_amount}")
-            self.store_transaction(self.name, self.amount, "Withdrawal", self.Account_number)
+            self.store_transaction(self.name, balance_before, self.amount, w_amount, "Withdrawal", self.Account_number)
             return (f'You have successfully withdrawn {w_amount}')
         
     
     def deposit(self, d_amount):
+        balance_before = self.amount
         self.amount = d_amount + self.amount
         self.transaction_history.append(f"Deposit: {d_amount}")
-        self.store_transaction(self.name, self.amount, "Deposit", self.Account_number)
+        self.store_transaction(self.name,  balance_before, self.amount, d_amount, "Deposit", self.Account_number)
         return (f'You have successfully Deposited {d_amount}')
     
     def check_balance(self):
         return self.amount
     
-    def store_transaction(self, name, amount, transaction_type, account_number):
-        self.transaction_history.append({"name":name, "amount":amount, "transaction type": transaction_type, "account number": account_number})
+    def store_transaction(self, name,balance_before, balance_after, amount, transaction_type, account_number):
+        self.transaction_history.append({"name":name, "balance_before": balance_before,"balance_after":balance_after,"amount":amount, "transaction type": transaction_type, "account number": account_number})
 
 david_ac1 = BankAccount(22233456, 'David', 35000)
 david_ac2 = BankAccount(23234567, 'David', 45000)
