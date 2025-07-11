@@ -15,12 +15,12 @@ class HospitalRegistry:
     def check_in(self):
         feel_ill = input(f"Does {self.Patient_name} feel ill?  (yes/no): ").lower()
         if feel_ill == "yes":
-            print(f"{self.Patient_name}, you should feel in the form before seeing a doctor for treatment.")
-            name = input("Enter your name: ")
-            sex = input("Enter your sex: ")
-            age = input("Enter your age: ")
-            symptoms = input("Enter your symptoms (separated by commas): ").split(',')
-            Insurance_number = input("Enter your Insurance number: ")
+            print(f"{self.Patient_name}, you should fill in the form before seeing a doctor for treatment.")
+            self.Patient_name = input("Enter your name: ")
+            self.sex = input("Enter your sex: ")
+            self.age = input("Enter your age: ")
+            self.symptoms = input("Enter your symptoms (separated by commas): ").split(',')
+            self.Insurance_number = input("Enter your Insurance number: ")
         else:
             print(f"{self.Patient_name} does not need to see a doctor right now.")
             
@@ -53,3 +53,5 @@ Josh = HospitalRegistry('Daniel', 'Josh', 19, 'Male', ['Fever', 'Cough', 'Headac
 print(Josh.check_in())
 print(Josh.appointment(Josh.Appointment_time, Josh.Doctor_name, Josh.Patient_name))
 print(Josh.discharge(Josh.Patient_name, Josh.Treatment_price, Josh.Outcome))
+Josh.Registry(Josh.Doctor_name, Josh.Patient_name, Josh.age, Josh.sex, Josh.symptoms, Josh.Insurance_number, Josh.Appointment_time, Josh.Treatment_price, Josh.Outcome)
+print(Josh.Hospital_registry)
