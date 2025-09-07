@@ -10,13 +10,19 @@ connection = psycopg2.connect(dbname = "Intern", user = "postgres", password = "
 
 cur = connection.cursor()
 
-cur.execute("CREATE TABLE json_data (name TEXT, age INTEGER);")
+cur.execute("CREATE TABLE IF NOT EXISTS json_data (name TEXT, age INTEGER);")
 
 for record in pyth_data:
     cur.execute("INSERT INTO json_data (name,age) VALUES(%s,%s)", (record['name'], record['age']))
 
 connection.commit()
+print("Data successfully moved")
+
+
+cur.execute("SELECT * FROM json_data")
+data_from_db = cur.fetchall()
+print (data_from_db)
+
 
 cur.close()
 connection.close()
-print("Data successfully moved")
