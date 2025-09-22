@@ -24,7 +24,7 @@ def get_all_records():
     cur = conn.cursor()
 
     try:
-        cur.execute("SELECT * FROM your_table_name;")
+        cur.execute("SELECT * FROM weekly_transactions;")
         db_records = cur.fetchall()
 
         column_names = [desc[0] for desc in cur.description]
