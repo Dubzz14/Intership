@@ -1,0 +1,2 @@
+@hourly /C/Users/HP/OneDrive/Downloads/Github/Internship/to_data.py >>/var/log/to_data.log 2>&1
+#Runs the hourly upload to the database.
