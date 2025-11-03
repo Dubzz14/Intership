@@ -1,5 +1,6 @@
 import json
 import psycopg2
+import os
 
 class BankAccount:
     def __init__(self, Account_number, name, amount, pin):
@@ -35,7 +36,7 @@ class BankAccount:
         
         pyth_data = self.transaction_history
 
-        connection = psycopg2.connect(dbname = "showroom", user = "postgres", password = "ezeh", host ="localhost")
+        connection = psycopg2.connect(dbname = os.getenv("DB_NAME","showroom"), user = os.getenv("DB_USER","postgres"), password = os.getenv("DB_PASS","ezeh"), host = os.getenv("DB_HOST","localhost"))
 
         cur = connection.cursor()
 
