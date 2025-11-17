@@ -11,6 +11,20 @@ api_dict = median.json()
 list_of_records = api_dict.get('products',[])
 
 df_normalized = pd.json_normalize(list_of_records)
+
+list_columns = ['tags', 'images']
+
+for col in list_columns:
+    if col in df_normalized.columns:
+        df_normalized[col] = df_normalized[col].apply(
+            lambda x: ', '.join(map(str, x)) if isinstance(x, list) else x
+        )
+        print(f"Column '{col}' converted to comma-separated string.")
+
+if 'reviews' in df_normalized.columns:
+    df_normalized = df_normalized.drop(columns=['reviews'])
+    print("Column 'reviews' (list of dicts) dropped.")
+
 df_normalized.columns = df_normalized.columns.str.replace('.', '_', regex=False)
 df_normalized.columns = df_normalized.columns.str.replace(':', '_', regex=False)
 
