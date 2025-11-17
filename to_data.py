@@ -7,7 +7,7 @@ json_string = '[{"name": "Alice","age": 22},{"name": "Alan","age": 32}]'
 
 pyth_data = json.loads(json_string)
 
-connection = connection = psycopg2.connect(dbname = os.getenv("DB_NAME","Intern"), user = os.getenv("DB_USER","postgres"), password = os.getenv("DB_PASS","ezeh"), host = os.getenv("DB_HOST","localhost"))
+connection = psycopg2.connect(dbname = os.getenv("DB_NAME","Intern"), user = os.getenv("DB_USER","postgres"), password = os.getenv("DB_PASS","ezeh"), host = os.getenv("DB_HOST","localhost"))
 
 
 cur = connection.cursor()
