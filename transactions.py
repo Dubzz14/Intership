@@ -38,7 +38,7 @@ class BankAccount:
 
         connection = psycopg2.connect(dbname = os.getenv("DB_NAME","showroom"), user = os.getenv("DB_USER","postgres"), password = os.getenv("DB_PASS","ezeh"), host = os.getenv("DB_HOST","localhost"))
 
-        cur = connection.cursor()
+        cur = connection.cursor() 
 
         cur.execute("CREATE TABLE IF NOT EXISTS transactions (name TEXT, balance_before INTEGER, balance_after INTEGER, amount INTEGER, transaction_type TEXT, account_number INTEGER);")
         
