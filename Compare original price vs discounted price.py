@@ -13,22 +13,28 @@ def get_db_connection():
         cursor_factory=RealDictCursor 
     )
 
-QUERY_1 = """
---Top discounted products
+QUERY_3 = """
+--Compare original price vs discounted price
 
-SELECT title, "discountPercentage"
-FROM products_data
-ORDER BY "discountPercentage" DESC
-LIMIT 10; 
+SELECT
+    title,
+    price AS original_price,
+    (price - (price * ("discountPercentage" / 100.0))) AS discounted_price,
+    "discountPercentage"
+FROM
+    public.products_data
+ORDER BY
+    price DESC
+LIMIT 10;
 """
 
-@app.route('/top discount')
+@app.route('/original vs discount')
 def get_analysis():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
         
-        cur.execute(QUERY_1)
+        cur.execute(QUERY_3)
         
         results = cur.fetchall()
         

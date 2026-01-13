@@ -13,22 +13,27 @@ def get_db_connection():
         cursor_factory=RealDictCursor 
     )
 
-QUERY_1 = """
---Top discounted products
+QUERY_7 = """
+--Rating distribution by category
 
-SELECT title, "discountPercentage"
-FROM products_data
-ORDER BY "discountPercentage" DESC
-LIMIT 10; 
+SELECT
+    category,
+    AVG(rating) AS average_rating
+FROM
+    products_data
+GROUP BY
+    category -- 
+ORDER BY
+    average_rating DESC;
 """
 
-@app.route('/top discount')
+@app.route('/rating by category')
 def get_analysis():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
         
-        cur.execute(QUERY_1)
+        cur.execute(QUERY_7)
         
         results = cur.fetchall()
         

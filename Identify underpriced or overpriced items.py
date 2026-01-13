@@ -13,22 +13,32 @@ def get_db_connection():
         cursor_factory=RealDictCursor 
     )
 
-QUERY_1 = """
---Top discounted products
+QUERY_4 = """
+--Identify underpriced or overpriced items
 
-SELECT title, "discountPercentage"
-FROM products_data
-ORDER BY "discountPercentage" DESC
-LIMIT 10; 
+SELECT
+    title,
+    category,
+    price,
+    AVG(price) OVER (PARTITION BY category) AS category_avg_price,
+    CASE
+        WHEN price > AVG(price) OVER (PARTITION BY category) THEN 'Overpriced'
+        WHEN price < AVG(price) OVER (PARTITION BY category) THEN 'Underpriced'
+        ELSE 'Fairly Priced'
+    END AS price_status
+FROM
+    products_data
+ORDER BY
+    price_status, category;
 """
 
-@app.route('/top discount')
+@app.route('/under vs over')
 def get_analysis():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
         
-        cur.execute(QUERY_1)
+        cur.execute(QUERY_4)
         
         results = cur.fetchall()
         
